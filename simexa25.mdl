@@ -1,0 +1,192 @@
+Model {
+  Name			  "simexa25"
+  Version		  2.09
+  SimParamPage		  Solver
+  SampleTimeColors	  off
+  InvariantConstants	  off
+  WideVectorLines	  off
+  ShowLineWidths	  off
+  PaperOrientation	  landscape
+  PaperType		  usletter
+  PaperUnits		  inches
+  StartTime		  "0.0"
+  StopTime		  "5.0"
+  Solver		  ode45
+  RelTol		  "1e-5"
+  AbsTol		  "1e-6"
+  Refine		  "1"
+  MaxStep		  "auto"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  MaxOrder		  5
+  OutputOption		  RefineOutputTimes
+  OutputTimes		  "[]"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  SaveTime		  on
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  on
+  OutputSaveName	  "yout"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  LimitMaxRows		  off
+  MaxRows		  "1000"
+  Decimation		  "1"
+  AlgebraicLoopMsg	  warning
+  MinStepSizeMsg	  warning
+  UnconnectedInputMsg	  warning
+  UnconnectedOutputMsg	  warning
+  UnconnectedLineMsg	  warning
+  ConsistencyChecking	  off
+  ZeroCross		  on
+  SimulationMode	  normal
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWInlineParameters	  off
+  RTWRetainRTWFile	  off
+  RTWTemplateMakefile	  "grt_vc.tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  BlockDefaults {
+    Orientation		    right
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    NamePlacement	    normal
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+    ShowName		    on
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    center
+    VerticalAlignment	    middle
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  System {
+    Name		    "simexa25"
+    Location		    [57, 132, 648, 552]
+    Open		    on
+    ScreenColor		    white
+    Block {
+      BlockType		      Clock
+      Name		      "Clock"
+      Position		      [200, 290, 220, 310]
+      FontName		      "Times New Roman"
+      FontSize		      18
+      Location		      [12, 31, 119, 76]
+    }
+    Block {
+      BlockType		      Step
+      Name		      "Step"
+      Position		      [60, 203, 100, 247]
+      FontName		      "Times New Roman"
+      FontSize		      18
+      Time		      "1"
+      Before		      "1"
+      After		      "1"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace"
+      Position		      [300, 208, 400, 242]
+      FontName		      "Times New Roman"
+      FontSize		      18
+      VariableName	      "c"
+      Buffer		      "inf"
+      Decimation	      "1"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace1"
+      Position		      [300, 284, 405, 316]
+      FontName		      "Times New Roman"
+      FontSize		      18
+      VariableName	      "t"
+      Buffer		      "inf"
+      Decimation	      "1"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Transfer Fcn"
+      Position		      [155, 196, 260, 254]
+      FontName		      "Times New Roman"
+      FontSize		      18
+      Numerator		      "[25]"
+      Denominator	      "[1  2   25] "
+    }
+    Line {
+      SrcBlock		      "Clock"
+      SrcPort		      1
+      DstBlock		      "To Workspace1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Step"
+      SrcPort		      1
+      DstBlock		      "Transfer Fcn"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Transfer Fcn"
+      SrcPort		      1
+      DstBlock		      "To Workspace"
+      DstPort		      1
+    }
+    Annotation {
+      Position		      [253, 378]
+      FontSize		      12
+      Text		      "Simulation model for system in Example A.25"
+    }
+    Annotation {
+      Position		      [282, 110]
+      FontName		      "Times New Roman"
+      FontSize		      18
+      Text		      "C(s)/R(S) = 25/(s^2+2s + 25)(s),  where r(t) "
+			      "is a unit step function"
+    }
+    Annotation {
+      Position		      [217, 54]
+      FontName		      "Times New Roman"
+      FontSize		      18
+      Text		      "Use simulink to obtain the step response "
+			      "for the\n   following transfer function.        "
+			      "                         "
+    }
+    Annotation {
+      Position		      [274, 143]
+      FontName		      "Times New Roman"
+      FontSize		      18
+      Text		      "and use To Workspace block to return the "
+			      "response c(t) to the \nMATLAB Workspace.        "
+			      "                                                "
+			      "  "
+    }
+    Annotation {
+      Position		      [88, 186]
+      FontName		      "Times New Roman"
+      FontSize		      18
+      Text		      "u(t)"
+    }
+  }
+}

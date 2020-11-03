@@ -1,0 +1,284 @@
+Model {
+  Name			  "sim12ex3"
+  Version		  2.09
+  SimParamPage		  Solver
+  SampleTimeColors	  off
+  InvariantConstants	  off
+  WideVectorLines	  off
+  ShowLineWidths	  off
+  PaperOrientation	  landscape
+  PaperType		  usletter
+  PaperUnits		  inches
+  StartTime		  "0.0"
+  StopTime		  "10"
+  Solver		  ode45
+  RelTol		  "1e-3"
+  AbsTol		  "1e-3"
+  Refine		  "1"
+  MaxStep		  ".1"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  MaxOrder		  5
+  OutputOption		  RefineOutputTimes
+  OutputTimes		  "[]"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  SaveTime		  off
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  off
+  OutputSaveName	  "yout"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  LimitMaxRows		  off
+  MaxRows		  "1000"
+  Decimation		  "1"
+  AlgebraicLoopMsg	  warning
+  MinStepSizeMsg	  warning
+  UnconnectedInputMsg	  warning
+  UnconnectedOutputMsg	  warning
+  UnconnectedLineMsg	  warning
+  ConsistencyChecking	  off
+  ZeroCross		  on
+  SimulationMode	  normal
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWInlineParameters	  off
+  RTWRetainRTWFile	  off
+  RTWTemplateMakefile	  "grt_vc.tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  BlockDefaults {
+    Orientation		    right
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    NamePlacement	    normal
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+    ShowName		    on
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    center
+    VerticalAlignment	    middle
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  System {
+    Name		    "sim12ex3"
+    Location		    [143, 258, 892, 951]
+    Open		    on
+    ScreenColor		    white
+    Block {
+      BlockType		      Gain
+      Name		      "1/R"
+      Position		      [285, 168, 340, 222]
+      Orientation	      left
+      Gain		      "20"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Governor"
+      Position		      [140, 92, 205, 138]
+      Numerator		      "[1]"
+      Denominator	      "[0.2   1]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Inertia & load"
+      Position		      [415, 87, 495, 133]
+      Numerator		      "[1]"
+      Denominator	      "[10  0.8]"
+    }
+    Block {
+      BlockType		      Integrator
+      Name		      "Integrator"
+      Ports		      [1, 1, 0, 0, 0]
+      Position		      [260, 238, 290, 282]
+      Orientation	      left
+      ExternalReset	      none
+      InitialConditionSource      internal
+      InitialCondition	      "0"
+      LimitOutput	      off
+      UpperSaturationLimit      "inf"
+      LowerSaturationLimit      "-inf"
+      ShowSaturationPort      off
+      ShowStatePort	      off
+      AbsoluteTolerance	      "auto"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "KI"
+      Position		      [165, 237, 215, 283]
+      Orientation	      left
+      Gain		      "7"
+    }
+    Block {
+      BlockType		      Step
+      Name		      "Step Input"
+      Position		      [270, 22, 310, 58]
+      Time		      "100"
+      Before		      "0.2"
+      After		      ".2"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [360, 90, 385, 125]
+      Inputs		      "-+"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum1"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [95, 97, 115, 133]
+      Inputs		      "--"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace"
+      Position		      [595, 34, 640, 66]
+      VariableName	      "Dw"
+      Buffer		      "1000"
+      Decimation	      "1"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Turbine"
+      Position		      [240, 93, 310, 137]
+      Numerator		      "[1]"
+      Denominator	      "[0.5  1]"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "delta w"
+      Ports		      [1, 0, 0, 0, 0]
+      Position		      [600, 90, 640, 130]
+      Floating		      off
+      Location		      [188, -403, 512, -164]
+      Open		      off
+      Grid		      on
+      TickLabels	      on
+      ZoomMode		      on
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitMaxRows	      on
+      MaxRows		      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+    }
+    Line {
+      SrcBlock		      "Governor"
+      SrcPort		      1
+      DstBlock		      "Turbine"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Turbine"
+      SrcPort		      1
+      DstBlock		      "Sum"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Sum"
+      SrcPort		      1
+      DstBlock		      "Inertia & load"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum1"
+      SrcPort		      1
+      DstBlock		      "Governor"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Integrator"
+      SrcPort		      1
+      DstBlock		      "KI"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "KI"
+      SrcPort		      1
+      Points		      [-130, 0; 0, -155]
+      DstBlock		      "Sum1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "1/R"
+      SrcPort		      1
+      Points		      [-225, 0; 0, -70]
+      DstBlock		      "Sum1"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Step Input"
+      SrcPort		      1
+      Points		      [15, 0; 0, 60]
+      DstBlock		      "Sum"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Inertia & load"
+      SrcPort		      1
+      Points		      [15, 0]
+      Branch {
+	Points			[0, 85]
+	DstBlock		"1/R"
+	DstPort			1
+      }
+      Branch {
+	Points			[25, 0]
+	Branch {
+	  Points		  [0, 150]
+	  DstBlock		  "Integrator"
+	  DstPort		  1
+	}
+	Branch {
+	  Points		  [25, 0]
+	  Branch {
+	    DstBlock		    "delta w"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -60]
+	    DstBlock		    "To Workspace"
+	    DstPort		    1
+	  }
+	}
+      }
+    }
+    Annotation {
+      Position		      [283, 15]
+      Text		      "0.2u(t)"
+    }
+    Annotation {
+      Position		      [324, 337]
+      FontSize		      12
+      Text		      "Simulation diagram for Example 12.3"
+    }
+  }
+}

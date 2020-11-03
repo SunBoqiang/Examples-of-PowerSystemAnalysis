@@ -1,0 +1,705 @@
+Model {
+  Name			  "sim12ex5"
+  Version		  2.09
+  SimParamPage		  Solver
+  SampleTimeColors	  off
+  InvariantConstants	  off
+  WideVectorLines	  off
+  ShowLineWidths	  off
+  PaperOrientation	  landscape
+  PaperType		  usletter
+  PaperUnits		  inches
+  StartTime		  "0.0"
+  StopTime		  "25"
+  Solver		  ode45
+  RelTol		  "1e-3"
+  AbsTol		  "1e-3"
+  Refine		  "1"
+  MaxStep		  ".1"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  MaxOrder		  5
+  OutputOption		  RefineOutputTimes
+  OutputTimes		  "[]"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  SaveTime		  off
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  off
+  OutputSaveName	  "yout"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  LimitMaxRows		  off
+  MaxRows		  "1000"
+  Decimation		  "1"
+  AlgebraicLoopMsg	  warning
+  MinStepSizeMsg	  warning
+  UnconnectedInputMsg	  warning
+  UnconnectedOutputMsg	  warning
+  UnconnectedLineMsg	  warning
+  ConsistencyChecking	  off
+  ZeroCross		  on
+  SimulationMode	  normal
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWInlineParameters	  off
+  RTWRetainRTWFile	  off
+  RTWTemplateMakefile	  "grt_vc.tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  BlockDefaults {
+    Orientation		    right
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    NamePlacement	    normal
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+    ShowName		    on
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    center
+    VerticalAlignment	    middle
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  System {
+    Name		    "sim12ex5"
+    Location		    [54, 58, 985, 771]
+    Open		    on
+    ScreenColor		    white
+    Block {
+      BlockType		      TransferFcn
+      Name		      "   Governor 2"
+      Position		      [270, 412, 335, 458]
+      Numerator		      "[1]"
+      Denominator	      "[0.3   1]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      " Governor 1"
+      Position		      [260, 167, 325, 213]
+      Numerator		      "[1]"
+      Denominator	      "[0.2   1]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      " Turbine 1"
+      Position		      [390, 169, 440, 211]
+      Numerator		      "[1]"
+      Denominator	      "[0.5  1]"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "1/R1"
+      Position		      [405, 87, 450, 133]
+      Orientation	      left
+      Gain		      "20"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "1/R2\n"
+      Position		      [495, 492, 550, 538]
+      Orientation	      left
+      Gain		      "16"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "ACE1"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [45, 180, 65, 220]
+      Inputs		      "--"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "ACE2"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [50, 404, 70, 446]
+      Inputs		      "+-"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "B1=1/R1+D1"
+      Position		      [275, 28, 340, 82]
+      Orientation	      left
+      Gain		      "20.6"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "B2=1/R2+D2"
+      Position		      [440, 541, 495, 589]
+      Orientation	      left
+      Gain		      "16.9"
+    }
+    Block {
+      BlockType		      Clock
+      Name		      "Clock"
+      Position		      [815, 325, 835, 345]
+      Orientation	      down
+      Location		      [30, 40, 140, 75]
+    }
+    Block {
+      BlockType		      Clock
+      Name		      "Clock1"
+      Position		      [285, 235, 305, 255]
+      Orientation	      left
+      Location		      [30, 40, 140, 75]
+    }
+    Block {
+      BlockType		      Step
+      Name		      "DPL\n"
+      Position		      [470, 130, 500, 160]
+      Orientation	      down
+      Time		      "100"
+      Before		      "0.1875"
+      After		      ".1875"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "Gain"
+      Position		      [515, 326, 555, 364]
+      Orientation	      left
+      Gain		      "2"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Inertia & load 1\n"
+      Position		      [575, 167, 655, 213]
+      Numerator		      "[1]"
+      Denominator	      "[10  0.6]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Inertia & load 2"
+      Position		      [575, 402, 655, 448]
+      Numerator		      "[1]"
+      Denominator	      "[8  0.9]"
+    }
+    Block {
+      BlockType		      Integrator
+      Name		      "Integrator"
+      Ports		      [1, 1, 0, 0, 0]
+      Position		      [585, 328, 615, 362]
+      Orientation	      left
+      ExternalReset	      none
+      InitialConditionSource      internal
+      InitialCondition	      "0"
+      LimitOutput	      off
+      UpperSaturationLimit      "inf"
+      LowerSaturationLimit      "-inf"
+      ShowSaturationPort      off
+      ShowStatePort	      off
+      AbsoluteTolerance	      "auto"
+    }
+    Block {
+      BlockType		      Integrator
+      Name		      "Integrator1"
+      Ports		      [1, 1, 0, 0, 0]
+      Position		      [90, 183, 120, 217]
+      ExternalReset	      none
+      InitialConditionSource      internal
+      InitialCondition	      "0"
+      LimitOutput	      off
+      UpperSaturationLimit      "inf"
+      LowerSaturationLimit      "-inf"
+      ShowSaturationPort      off
+      ShowStatePort	      off
+      AbsoluteTolerance	      "auto"
+    }
+    Block {
+      BlockType		      Integrator
+      Name		      "Integrator2"
+      Ports		      [1, 1, 0, 0, 0]
+      Position		      [90, 405, 115, 445]
+      ExternalReset	      none
+      InitialConditionSource      internal
+      InitialCondition	      "0"
+      LimitOutput	      off
+      UpperSaturationLimit      "inf"
+      LowerSaturationLimit      "-inf"
+      ShowSaturationPort      off
+      ShowStatePort	      off
+      AbsoluteTolerance	      "auto"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "KI1"
+      Position		      [140, 183, 170, 217]
+      Gain		      ".3"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "KI2 "
+      Position		      [140, 408, 180, 442]
+      Gain		      ".3"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [732, 450, 763, 485]
+      Orientation	      down
+      Inputs		      "2"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux1"
+      Ports		      [3, 1, 0, 0, 0]
+      Position		      [820, 445, 860, 485]
+      Orientation	      down
+      Inputs		      "3"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux2"
+      Ports		      [3, 1, 0, 0, 0]
+      Position		      [295, 282, 335, 328]
+      Orientation	      left
+      Inputs		      "3"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux3"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [215, 239, 250, 266]
+      Orientation	      left
+      Inputs		      "2"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope 1"
+      Ports		      [1, 0, 0, 0, 0]
+      Position		      [775, 510, 805, 540]
+      Floating		      off
+      Location		      [683, 396, 1007, 635]
+      Open		      off
+      Grid		      on
+      TickLabels	      on
+      ZoomMode		      on
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitMaxRows	      on
+      MaxRows		      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope 2"
+      Ports		      [1, 0, 0, 0, 0]
+      Position		      [190, 290, 220, 320]
+      Orientation	      left
+      Floating		      off
+      Location		      [188, 365, 512, 604]
+      Open		      off
+      Grid		      on
+      TickLabels	      on
+      ZoomMode		      on
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitMaxRows	      on
+      MaxRows		      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum"
+      Ports		      [3, 1, 0, 0, 0]
+      Position		      [520, 172, 540, 208]
+      Inputs		      "-+-"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum1"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [200, 172, 220, 208]
+      Inputs		      "-+"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum2"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [655, 329, 675, 356]
+      Orientation	      left
+      Inputs		      "+-"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum3"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [520, 407, 540, 443]
+      Inputs		      "++"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum4"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [220, 417, 240, 453]
+      Inputs		      "+-"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Turbine 2"
+      Position		      [400, 413, 470, 457]
+      Numerator		      "[1]"
+      Denominator	      "[0.6  1]"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "t  \nDw1\nDw2"
+      Position		      [815, 555, 865, 600]
+      Orientation	      down
+      VariableName	      "Dw"
+      Buffer		      "1000"
+      Decimation	      "1"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "t, Pm1, Pm2, P12"
+      Position		      [95, 245, 185, 265]
+      Orientation	      left
+      VariableName	      "DP"
+      Buffer		      "1000"
+      Decimation	      "1"
+      SampleTime	      "0"
+    }
+    Line {
+      SrcBlock		      " Turbine 1"
+      SrcPort		      1
+      DstBlock		      "Sum"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Sum"
+      SrcPort		      1
+      DstBlock		      "Inertia & load 1\n"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum1"
+      SrcPort		      1
+      DstBlock		      " Governor 1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "DPL\n"
+      SrcPort		      1
+      Points		      [0, 15]
+      DstBlock		      "Sum"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "1/R1"
+      SrcPort		      1
+      Points		      [-230, 0; 0, 70]
+      DstBlock		      "Sum1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum2"
+      SrcPort		      1
+      DstBlock		      "Integrator"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Integrator"
+      SrcPort		      1
+      DstBlock		      "Gain"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum3"
+      SrcPort		      1
+      DstBlock		      "Inertia & load 2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum4"
+      SrcPort		      1
+      DstBlock		      "   Governor 2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Turbine 2"
+      SrcPort		      1
+      DstBlock		      "Sum3"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "1/R2\n"
+      SrcPort		      1
+      Points		      [-300, 0; 0, -70]
+      DstBlock		      "Sum4"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Inertia & load 2"
+      SrcPort		      1
+      Points		      [-5, 0]
+      Branch {
+	Points			[200, 0]
+	DstBlock		"Mux1"
+	DstPort			3
+      }
+      Branch {
+	Points			[100, 0]
+	DstBlock		"Mux"
+	DstPort			2
+      }
+      Branch {
+	Points			[60, 0]
+	Branch {
+	  Points		  [0, 90]
+	  Branch {
+	    DstBlock		    "1/R2\n"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 50]
+	    DstBlock		    "B2=1/R2+D2"
+	    DstPort		    1
+	  }
+	}
+	Branch {
+	  Points		  [0, -75]
+	  DstBlock		  "Sum2"
+	  DstPort		  2
+	}
+      }
+    }
+    Line {
+      SrcBlock		      "Mux1"
+      SrcPort		      1
+      DstBlock		      "t  \nDw1\nDw2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Clock"
+      SrcPort		      1
+      DstBlock		      "Mux1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "KI1"
+      SrcPort		      1
+      DstBlock		      "Sum1"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Integrator1"
+      SrcPort		      1
+      DstBlock		      "KI1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "ACE1"
+      SrcPort		      1
+      DstBlock		      "Integrator1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Integrator2"
+      SrcPort		      1
+      DstBlock		      "KI2 "
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "ACE2"
+      SrcPort		      1
+      DstBlock		      "Integrator2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "KI2 "
+      SrcPort		      1
+      DstBlock		      "Sum4"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "B1=1/R1+D1"
+      SrcPort		      1
+      Points		      [-250, 0; 0, 135]
+      DstBlock		      "ACE1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "B2=1/R2+D2"
+      SrcPort		      1
+      Points		      [-415, 0; 0, -130]
+      DstBlock		      "ACE2"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Mux"
+      SrcPort		      1
+      Points		      [0, 35]
+      DstBlock		      "Scope 1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Gain"
+      SrcPort		      1
+      Points		      [-25, 0]
+      Branch {
+	Points			[0, -145]
+	DstBlock		"Sum"
+	DstPort			3
+      }
+      Branch {
+	Points			[0, 70]
+	DstBlock		"Sum3"
+	DstPort			1
+      }
+      Branch {
+	Points			[-120, 0]
+	Branch {
+	  Points		  [-345, 0]
+	  Branch {
+	    Points		    [0, -135]
+	    DstBlock		    "ACE1"
+	    DstPort		    2
+	  }
+	  Branch {
+	    Points		    [0, 70]
+	    DstBlock		    "ACE2"
+	    DstPort		    1
+	  }
+	}
+	Branch {
+	  Points		  [0, -25]
+	  DstBlock		  "Mux2"
+	  DstPort		  3
+	}
+      }
+    }
+    Line {
+      SrcBlock		      " Governor 1"
+      SrcPort		      1
+      Points		      [35, 0]
+      Branch {
+	DstBlock		" Turbine 1"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, 100]
+	DstBlock		"Mux2"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "   Governor 2"
+      SrcPort		      1
+      Points		      [40, 0]
+      Branch {
+	DstBlock		"Turbine 2"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, -130]
+	DstBlock		"Mux2"
+	DstPort			2
+      }
+    }
+    Line {
+      SrcBlock		      "Inertia & load 1\n"
+      SrcPort		      1
+      Points		      [50, 0]
+      Branch {
+	Points			[0, 145]
+	DstBlock		"Sum2"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, -80]
+	Branch {
+	  DstBlock		  "1/R1"
+	  DstPort		  1
+	}
+	Branch {
+	  Points		  [0, -55]
+	  DstBlock		  "B1=1/R1+D1"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	Points			[30, 0; 0, 190]
+	Branch {
+	  DstBlock		  "Mux"
+	  DstPort		  1
+	}
+	Branch {
+	  Points		  [100, 0]
+	  DstBlock		  "Mux1"
+	  DstPort		  2
+	}
+      }
+    }
+    Line {
+      SrcBlock		      "Mux2"
+      SrcPort		      1
+      Points		      [-15, 0]
+      Branch {
+	DstBlock		"Scope 2"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, -45]
+	DstBlock		"Mux3"
+	DstPort			2
+      }
+    }
+    Line {
+      SrcBlock		      "Clock1"
+      SrcPort		      1
+      DstBlock		      "Mux3"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Mux3"
+      SrcPort		      1
+      DstBlock		      "t, Pm1, Pm2, P12"
+      DstPort		      1
+    }
+    Annotation {
+      Position		      [822, 515]
+      Text		      "Dw1"
+    }
+    Annotation {
+      Position		      [822, 537]
+      Text		      "Dw2\n"
+    }
+    Annotation {
+      Position		      [438, 629]
+      FontSize		      12
+      Text		      "Simulation block diagram for Example 12.5"
+    }
+  }
+}

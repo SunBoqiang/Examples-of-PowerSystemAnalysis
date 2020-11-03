@@ -1,0 +1,249 @@
+Model {
+  Name			  "sim12ex6"
+  Version		  2.09
+  SimParamPage		  Solver
+  SampleTimeColors	  off
+  InvariantConstants	  off
+  WideVectorLines	  off
+  ShowLineWidths	  off
+  PaperOrientation	  landscape
+  PaperType		  usletter
+  PaperUnits		  inches
+  StartTime		  "0.0"
+  StopTime		  "20"
+  Solver		  ode45
+  RelTol		  "1e-3"
+  AbsTol		  "1e-3"
+  Refine		  "1"
+  MaxStep		  ".10"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  MaxOrder		  5
+  OutputOption		  RefineOutputTimes
+  OutputTimes		  "[]"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  SaveTime		  off
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  off
+  OutputSaveName	  "yout"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  LimitMaxRows		  off
+  MaxRows		  "1000"
+  Decimation		  "1"
+  AlgebraicLoopMsg	  warning
+  MinStepSizeMsg	  warning
+  UnconnectedInputMsg	  warning
+  UnconnectedOutputMsg	  warning
+  UnconnectedLineMsg	  warning
+  ConsistencyChecking	  off
+  ZeroCross		  on
+  SimulationMode	  normal
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWInlineParameters	  off
+  RTWRetainRTWFile	  off
+  RTWTemplateMakefile	  "grt_vc.tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  BlockDefaults {
+    Orientation		    right
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    NamePlacement	    normal
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+    ShowName		    on
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    center
+    VerticalAlignment	    middle
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  System {
+    Name		    "sim12ex6"
+    Location		    [142, 143, 929, 588]
+    Open		    on
+    ScreenColor		    white
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Amplifier"
+      Position		      [200, 93, 285, 147]
+      Numerator		      "[10]"
+      Denominator	      "[0.1  1]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Exciter"
+      Position		      [330, 92, 415, 148]
+      Numerator		      "[1]"
+      Denominator	      "[0.4  1]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Generator"
+      Position		      [470, 94, 550, 146]
+      Numerator		      "[1]"
+      Denominator	      "[1  1]"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope"
+      Ports		      [1, 0, 0, 0, 0]
+      Position		      [645, 99, 680, 141]
+      Floating		      off
+      Location		      [188, 365, 512, 604]
+      Open		      off
+      Grid		      on
+      TickLabels	      on
+      ZoomMode		      on
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitMaxRows	      on
+      MaxRows		      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Sensor"
+      Position		      [265, 229, 360, 281]
+      Orientation	      left
+      Numerator		      "[1]"
+      Denominator	      "[0.05  1]"
+    }
+    Block {
+      BlockType		      Step
+      Name		      "Step Input"
+      Position		      [40, 92, 80, 128]
+      Time		      "20"
+      Before		      "1"
+      After		      "1"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [125, 100, 160, 140]
+      Inputs		      "+-"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "Terminal Voltage"
+      Position		      [645, 184, 690, 216]
+      VariableName	      "Vt"
+      Buffer		      "1000"
+      Decimation	      "1"
+      SampleTime	      "0"
+    }
+    Line {
+      SrcBlock		      "Generator"
+      SrcPort		      1
+      Points		      [35, 0]
+      Branch {
+	Points			[25, 0]
+	Branch {
+	  Points		  [0, 80]
+	  DstBlock		  "Terminal Voltage"
+	  DstPort		  1
+	}
+	Branch {
+	  DstBlock		  "Scope"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	Points			[0, 135]
+	DstBlock		"Sensor"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Sensor"
+      SrcPort		      1
+      Points		      [-165, 0; 0, -125]
+      DstBlock		      "Sum"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Exciter"
+      SrcPort		      1
+      DstBlock		      "Generator"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Amplifier"
+      SrcPort		      1
+      DstBlock		      "Exciter"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum"
+      SrcPort		      1
+      DstBlock		      "Amplifier"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Step Input"
+      SrcPort		      1
+      DstBlock		      "Sum"
+      DstPort		      1
+    }
+    Annotation {
+      Position		      [382, 326]
+      FontSize		      12
+      Text		      "Simulation block diagram for Example 12.6\nTermi"
+			      "nal voltage step response"
+    }
+    Annotation {
+      Position		      [622, 92]
+      VerticalAlignment	      top
+      Text		      "Vt"
+    }
+    Annotation {
+      Position		      [437, 97]
+      VerticalAlignment	      top
+      Text		      "VF"
+    }
+    Annotation {
+      Position		      [307, 97]
+      VerticalAlignment	      top
+      Text		      "VR"
+    }
+    Annotation {
+      Position		      [182, 102]
+      VerticalAlignment	      top
+      Text		      "Ve"
+    }
+    Annotation {
+      Position		      [57, 77]
+      VerticalAlignment	      top
+      Text		      "Vref"
+    }
+  }
+}

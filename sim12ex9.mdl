@@ -1,0 +1,715 @@
+Model {
+  Name			  "sim12ex9"
+  Version		  2.09
+  SimParamPage		  Solver
+  SampleTimeColors	  off
+  InvariantConstants	  off
+  WideVectorLines	  off
+  ShowLineWidths	  off
+  PaperOrientation	  landscape
+  PaperType		  usletter
+  PaperUnits		  inches
+  StartTime		  "0.0"
+  StopTime		  "15"
+  Solver		  ode23
+  RelTol		  "1e-3"
+  AbsTol		  "1e-3"
+  Refine		  "1"
+  MaxStep		  ".05"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  MaxOrder		  5
+  OutputOption		  RefineOutputTimes
+  OutputTimes		  "[]"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  SaveTime		  off
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  off
+  OutputSaveName	  "yout"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  LimitMaxRows		  off
+  MaxRows		  "1000"
+  Decimation		  "1"
+  AlgebraicLoopMsg	  warning
+  MinStepSizeMsg	  warning
+  UnconnectedInputMsg	  warning
+  UnconnectedOutputMsg	  warning
+  UnconnectedLineMsg	  warning
+  ConsistencyChecking	  off
+  ZeroCross		  on
+  SimulationMode	  normal
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWInlineParameters	  off
+  RTWRetainRTWFile	  off
+  RTWTemplateMakefile	  "grt_vc.tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  BlockDefaults {
+    Orientation		    right
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    NamePlacement	    normal
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+    ShowName		    on
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    center
+    VerticalAlignment	    middle
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  System {
+    Name		    "sim12ex9"
+    Location		    [102, 58, 960, 751]
+    Open		    on
+    ScreenColor		    white
+    Block {
+      BlockType		      Gain
+      Name		      "1/R"
+      Position		      [230, 113, 285, 167]
+      Orientation	      left
+      Gain		      "20"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Amplifier"
+      Position		      [240, 409, 310, 461]
+      Numerator		      "10"
+      Denominator	      "[0.1  1]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Exciter"
+      Position		      [335, 411, 405, 459]
+      Numerator		      "1"
+      Denominator	      "[0.4  1]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Generator"
+      Position		      [505, 399, 575, 451]
+      Numerator		      "[0.8]"
+      Denominator	      "[ 1.4 1]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Governor"
+      Position		      [110, 182, 175, 228]
+      Numerator		      "[1]"
+      Denominator	      "[0.2   1]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Inertia & load"
+      Position		      [415, 182, 495, 228]
+      Numerator		      "[1]"
+      Denominator	      "[10  0.8]"
+    }
+    Block {
+      BlockType		      Integrator
+      Name		      "Integrator"
+      Ports		      [1, 1, 0, 0, 0]
+      Position		      [155, 68, 185, 112]
+      Orientation	      left
+      ExternalReset	      none
+      InitialConditionSource      internal
+      InitialCondition	      "0"
+      LimitOutput	      off
+      UpperSaturationLimit      "inf"
+      LowerSaturationLimit      "-inf"
+      ShowSaturationPort      off
+      ShowStatePort	      off
+      AbsoluteTolerance	      "auto"
+    }
+    Block {
+      BlockType		      Integrator
+      Name		      "Integrator1"
+      Ports		      [1, 1, 0, 0, 0]
+      Position		      [590, 187, 620, 223]
+      ExternalReset	      none
+      InitialConditionSource      internal
+      InitialCondition	      "0"
+      LimitOutput	      off
+      UpperSaturationLimit      "inf"
+      LowerSaturationLimit      "-inf"
+      ShowSaturationPort      off
+      ShowStatePort	      off
+      AbsoluteTolerance	      "auto"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "K1=Ps"
+      Position		      [355, 253, 405, 307]
+      Orientation	      left
+      Gain		      "1.5"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "K2"
+      Position		      [480, 305, 535, 365]
+      Orientation	      left
+      Gain		      ".2"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "K4"
+      Position		      [405, 360, 465, 410]
+      Orientation	      down
+      Gain		      "1.4"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "K5"
+      Position		      [635, 325, 695, 375]
+      Orientation	      down
+      Gain		      "-0.1"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "K6"
+      Position		      [615, 400, 675, 450]
+      Gain		      ".5"
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "KI"
+      Position		      [65, 67, 115, 113]
+      Orientation	      left
+      Gain		      "6"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "PID Controller"
+      Ports		      [1, 1, 0, 0, 0]
+      Position		      [170, 419, 210, 451]
+      ShowPortLabels	      off
+      MaskType		      "PID Controller"
+      MaskDescription	      "Enter expressions for proportional, integral, "
+			      "and derivative terms.\nP+I/s+Ds"
+      MaskHelp		      "This block implements a PID controller where "
+			      "parameters are entered for the Proportional, "
+			      "Integral and Derivative terms. Unmask this "
+			      "block to see how it works. The derivative "
+			      "term is implemented using a true derivative "
+			      "block."
+      MaskPromptString	      "Proportional:|Integral|Derivative:"
+      MaskStyleString	      "edit,edit,edit"
+      MaskInitialization      "P=@1; I=@2; D=@3;"
+      MaskDisplay	      "disp('PID')"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      none
+      MaskIconUnits	      autoscale
+      MaskValueString	      "1|0.25|0.3"
+      System {
+	Name			"PID Controller"
+	Location		[0, 0, 362, 244]
+	Open			off
+	ScreenColor		white
+	Block {
+	  BlockType		  Inport
+	  Name			  "In_1"
+	  Position		  [25, 65, 45, 85]
+	  Port			  "1"
+	  PortWidth		  "-1"
+	  SampleTime		  "-1"
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "D"
+	  Position		  [95, 129, 115, 151]
+	  Gain			  "D"
+	}
+	Block {
+	  BlockType		  Derivative
+	  Name			  "Derivative"
+	  Position		  [150, 128, 190, 152]
+	}
+	Block {
+	  BlockType		  TransferFcn
+	  Name			  "Integral"
+	  Position		  [110, 57, 145, 93]
+	  Numerator		  "[I]"
+	  Denominator		  "[1 0]"
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Proportional"
+	  Position		  [120, 13, 140, 37]
+	  Gain			  "P"
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum"
+	  Ports			  [3, 1, 0, 0, 0]
+	  Position		  [245, 57, 265, 93]
+	  Inputs		  "+++"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out_1"
+	  Position		  [290, 65, 310, 85]
+	  Port			  "1"
+	  OutputWhenDisabled	  held
+	  InitialOutput		  "0"
+	}
+	Line {
+	  SrcBlock		  "Proportional"
+	  SrcPort		  1
+	  Points		  [65, 0; 0, 40]
+	  DstBlock		  "Sum"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Integral"
+	  SrcPort		  1
+	  DstBlock		  "Sum"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Derivative"
+	  SrcPort		  1
+	  Points		  [20, 0; 0, -55]
+	  DstBlock		  "Sum"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "In_1"
+	  SrcPort		  1
+	  Points		  [15, 0]
+	  Branch {
+	    Points		    [15, 0]
+	    Branch {
+	      Points		      [0, -50]
+	      DstBlock		      "Proportional"
+	      DstPort		      1
+	    }
+	    Branch {
+	      DstBlock		      "Integral"
+	      DstPort		      1
+	    }
+	  }
+	  Branch {
+	    Points		    [0, 65]
+	    DstBlock		    "D"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Sum"
+	  SrcPort		  1
+	  DstBlock		  "Out_1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "D"
+	  SrcPort		  1
+	  DstBlock		  "Derivative"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope 2"
+      Ports		      [1, 0, 0, 0, 0]
+      Position		      [770, 392, 815, 438]
+      Floating		      off
+      Location		      [188, 365, 512, 604]
+      Open		      off
+      Grid		      on
+      TickLabels	      on
+      ZoomMode		      on
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitMaxRows	      on
+      MaxRows		      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope1"
+      Ports		      [1, 0, 0, 0, 0]
+      Position		      [575, 106, 615, 144]
+      Floating		      off
+      Location		      [188, 365, 512, 604]
+      Open		      off
+      Grid		      on
+      TickLabels	      on
+      ZoomMode		      on
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitMaxRows	      on
+      MaxRows		      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Sensor"
+      Position		      [330, 484, 425, 536]
+      Orientation	      left
+      Numerator		      "[1]"
+      Denominator	      "[0.05  1]"
+    }
+    Block {
+      BlockType		      Step
+      Name		      "Step Input"
+      Position		      [320, 150, 340, 170]
+      Orientation	      down
+      Time		      "2"
+      Before		      "0.2"
+      After		      ".2"
+    }
+    Block {
+      BlockType		      Step
+      Name		      "Step Input1"
+      Position		      [20, 407, 60, 443]
+      Time		      "12"
+      Before		      "1"
+      After		      "1"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum"
+      Ports		      [3, 1, 0, 0, 0]
+      Position		      [365, 181, 390, 229]
+      Inputs		      "-+-"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum1"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [55, 187, 75, 223]
+      Inputs		      "--"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum2"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [100, 415, 135, 455]
+      Inputs		      "+-"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum3"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [290, 270, 310, 310]
+      Orientation	      left
+      Inputs		      "++"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum4"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [455, 407, 475, 443]
+      Inputs		      "-+"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum5"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [705, 397, 725, 433]
+      Inputs		      "++"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Turbine"
+      Position		      [205, 183, 275, 227]
+      Numerator		      "[1]"
+      Denominator	      "[0.5  1]"
+    }
+    Line {
+      SrcBlock		      "Inertia & load"
+      SrcPort		      1
+      Points		      [20, 0]
+      Branch {
+	Points			[0, -65]
+	Branch {
+	  DstBlock		  "1/R"
+	  DstPort		  1
+	}
+	Branch {
+	  Points		  [0, -50]
+	  DstBlock		  "Integrator"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	Points			[30, 0]
+	Branch {
+	  Points		  [0, -80]
+	  DstBlock		  "Scope1"
+	  DstPort		  1
+	}
+	Branch {
+	  DstBlock		  "Integrator1"
+	  DstPort		  1
+	}
+      }
+    }
+    Line {
+      SrcBlock		      "Integrator1"
+      SrcPort		      1
+      Points		      [40, 0; 0, 75]
+      Branch {
+	Points			[-230, 0]
+	Branch {
+	  DstBlock		  "K4"
+	  DstPort		  1
+	}
+	Branch {
+	  DstBlock		  "K1=Ps"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	DstBlock		"K5"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "KI"
+      SrcPort		      1
+      Points		      [-35, 0; 0, 125]
+      DstBlock		      "Sum1"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Integrator"
+      SrcPort		      1
+      DstBlock		      "KI"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "1/R"
+      SrcPort		      1
+      Points		      [-185, 0]
+      DstBlock		      "Sum1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "K2"
+      SrcPort		      1
+      Points		      [-140, 0; 0, -35]
+      DstBlock		      "Sum3"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "K4"
+      SrcPort		      1
+      DstBlock		      "Sum4"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Generator"
+      SrcPort		      1
+      Points		      [10, 0]
+      Branch {
+	Points			[0, -90]
+	DstBlock		"K2"
+	DstPort			1
+      }
+      Branch {
+	DstBlock		"K6"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Sum5"
+      SrcPort		      1
+      Points		      [10, 0]
+      Branch {
+	Points			[0, 95]
+	DstBlock		"Sensor"
+	DstPort			1
+      }
+      Branch {
+	DstBlock		"Scope 2"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "K5"
+      SrcPort		      1
+      Points		      [0, 25]
+      DstBlock		      "Sum5"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "K1=Ps"
+      SrcPort		      1
+      DstBlock		      "Sum3"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "K6"
+      SrcPort		      1
+      DstBlock		      "Sum5"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Sum4"
+      SrcPort		      1
+      DstBlock		      "Generator"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Exciter"
+      SrcPort		      1
+      DstBlock		      "Sum4"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Sum3"
+      SrcPort		      1
+      Points		      [0, -70]
+      DstBlock		      "Sum"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "PID Controller"
+      SrcPort		      1
+      DstBlock		      "Amplifier"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum2"
+      SrcPort		      1
+      DstBlock		      "PID Controller"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Amplifier"
+      SrcPort		      1
+      DstBlock		      "Exciter"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sensor"
+      SrcPort		      1
+      Points		      [-240, 0]
+      DstBlock		      "Sum2"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Step Input1"
+      SrcPort		      1
+      DstBlock		      "Sum2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Step Input"
+      SrcPort		      1
+      Points		      [0, 15]
+      DstBlock		      "Sum"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum1"
+      SrcPort		      1
+      DstBlock		      "Governor"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum"
+      SrcPort		      1
+      DstBlock		      "Inertia & load"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Turbine"
+      SrcPort		      1
+      DstBlock		      "Sum"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Governor"
+      SrcPort		      1
+      DstBlock		      "Turbine"
+      DstPort		      1
+    }
+    Annotation {
+      Position		      [383, 578]
+      FontSize		      12
+      Text		      "Simulation block diagram for Example 12.9"
+    }
+    Annotation {
+      Position		      [537, 217]
+      VerticalAlignment	      top
+      Text		      "Dw"
+    }
+    Annotation {
+      Position		      [647, 182]
+      VerticalAlignment	      top
+      Text		      "Dd"
+    }
+    Annotation {
+      Position		      [417, 412]
+      VerticalAlignment	      top
+      Text		      "Vf"
+    }
+    Annotation {
+      Position		      [320, 388]
+      VerticalAlignment	      top
+      Text		      "VR"
+    }
+    Annotation {
+      Position		      [587, 427]
+      VerticalAlignment	      top
+      Text		      "E'"
+    }
+    Annotation {
+      Position		      [732, 382]
+      VerticalAlignment	      top
+      Text		      "Vt"
+    }
+    Annotation {
+      Position		      [132, 393]
+      VerticalAlignment	      top
+      Text		      "Ve"
+    }
+    Annotation {
+      Position		      [37, 372]
+      VerticalAlignment	      top
+      Text		      "Vref"
+    }
+    Annotation {
+      Position		      [302, 182]
+      VerticalAlignment	      top
+      Text		      "DPm"
+    }
+  }
+}

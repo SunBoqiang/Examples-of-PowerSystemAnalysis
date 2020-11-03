@@ -1,0 +1,301 @@
+Model {
+  Name			  "sim12ex7"
+  Version		  2.09
+  SimParamPage		  Solver
+  SampleTimeColors	  off
+  InvariantConstants	  off
+  WideVectorLines	  off
+  ShowLineWidths	  off
+  PaperOrientation	  landscape
+  PaperType		  usletter
+  PaperUnits		  inches
+  StartTime		  "0.0"
+  StopTime		  "10"
+  Solver		  ode23
+  RelTol		  "1e-3"
+  AbsTol		  "1e-3"
+  Refine		  "1"
+  MaxStep		  ".050"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  MaxOrder		  5
+  OutputOption		  RefineOutputTimes
+  OutputTimes		  "[]"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  SaveTime		  off
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  off
+  OutputSaveName	  "yout"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  LimitMaxRows		  off
+  MaxRows		  "1000"
+  Decimation		  "1"
+  AlgebraicLoopMsg	  warning
+  MinStepSizeMsg	  warning
+  UnconnectedInputMsg	  warning
+  UnconnectedOutputMsg	  warning
+  UnconnectedLineMsg	  warning
+  ConsistencyChecking	  off
+  ZeroCross		  on
+  SimulationMode	  normal
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWInlineParameters	  off
+  RTWRetainRTWFile	  off
+  RTWTemplateMakefile	  "grt_vc.tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  BlockDefaults {
+    Orientation		    right
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    NamePlacement	    normal
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+    ShowName		    on
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    center
+    VerticalAlignment	    middle
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  System {
+    Name		    "sim12ex7"
+    Location		    [151, 245, 996, 690]
+    Open		    on
+    ScreenColor		    white
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Amplifier"
+      Position		      [335, 93, 420, 147]
+      Numerator		      "[10]"
+      Denominator	      "[0.1  1]"
+    }
+    Block {
+      BlockType		      Clock
+      Name		      "Clock"
+      Position		      [715, 225, 735, 245]
+      Orientation	      left
+      Location		      [30, 40, 140, 75]
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Exciter"
+      Position		      [465, 92, 550, 148]
+      Numerator		      "[1]"
+      Denominator	      "[0.4  1]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Generator"
+      Position		      [595, 94, 675, 146]
+      Numerator		      "[1]"
+      Denominator	      "[1  1]"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [650, 221, 680, 274]
+      Orientation	      left
+      Inputs		      "2"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope"
+      Ports		      [1, 0, 0, 0, 0]
+      Position		      [610, 166, 640, 204]
+      Orientation	      left
+      Floating		      off
+      Location		      [188, 365, 512, 604]
+      Open		      off
+      Grid		      on
+      TickLabels	      on
+      ZoomMode		      on
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitMaxRows	      on
+      MaxRows		      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Sensor"
+      Position		      [400, 269, 495, 321]
+      Orientation	      left
+      Numerator		      "[1]"
+      Denominator	      "[0.05  1]"
+    }
+    Block {
+      BlockType		      TransferFcn
+      Name		      "Stabilizer"
+      Position		      [350, 184, 445, 236]
+      Orientation	      left
+      Numerator		      "[ 2.0  0]"
+      Denominator	      "[.04  1]"
+    }
+    Block {
+      BlockType		      Step
+      Name		      "Step Input"
+      Position		      [145, 87, 185, 123]
+      Time		      "10"
+      Before		      "1"
+      After		      "1"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum"
+      Ports		      [3, 1, 0, 0, 0]
+      Position		      [245, 100, 280, 140]
+      Inputs		      "+--"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "Terminal Voltage"
+      Position		      [560, 235, 610, 265]
+      Orientation	      left
+      VariableName	      "Vt"
+      Buffer		      "1000"
+      Decimation	      "1"
+      SampleTime	      "0"
+    }
+    Line {
+      SrcBlock		      "Mux"
+      SrcPort		      1
+      DstBlock		      "Terminal Voltage"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Clock"
+      SrcPort		      1
+      DstBlock		      "Mux"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Generator"
+      SrcPort		      1
+      Points		      [15, 0]
+      Branch {
+	Points			[60, 0]
+	Branch {
+	  Points		  [0, 140]
+	  DstBlock		  "Mux"
+	  DstPort		  2
+	}
+	Branch {
+	  Points		  [15, 0; 0, 175]
+	  DstBlock		  "Sensor"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	Points			[0, 65]
+	DstBlock		"Scope"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Exciter"
+      SrcPort		      1
+      Points		      [15, 0]
+      Branch {
+	Points			[0, 90]
+	DstBlock		"Stabilizer"
+	DstPort			1
+      }
+      Branch {
+	DstBlock		"Generator"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Sensor"
+      SrcPort		      1
+      Points		      [-185, 0; 0, -175]
+      DstBlock		      "Sum"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Stabilizer"
+      SrcPort		      1
+      Points		      [-115, 0]
+      DstBlock		      "Sum"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "Amplifier"
+      SrcPort		      1
+      DstBlock		      "Exciter"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum"
+      SrcPort		      1
+      DstBlock		      "Amplifier"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Step Input"
+      SrcPort		      1
+      DstBlock		      "Sum"
+      DstPort		      1
+    }
+    Annotation {
+      Position		      [480, 352]
+      FontSize		      12
+      Text		      "Simulation block diagram for Example 12.7"
+    }
+    Annotation {
+      Position		      [212, 87]
+      VerticalAlignment	      top
+      Text		      "Vref"
+    }
+    Annotation {
+      Position		      [707, 102]
+      VerticalAlignment	      top
+      Text		      "Vt"
+    }
+    Annotation {
+      Position		      [562, 97]
+      VerticalAlignment	      top
+      Text		      "VF"
+    }
+    Annotation {
+      Position		      [437, 97]
+      VerticalAlignment	      top
+      Text		      "VR"
+    }
+    Annotation {
+      Position		      [302, 97]
+      VerticalAlignment	      top
+      Text		      "Ve"
+    }
+  }
+}
